@@ -1,6 +1,6 @@
 {
-  "name": "Favicon2PNG",
-  "description": "Get favicon from domain. Convert to PNG",
+  "name": "favicon2PNG",
+  "description": "Get favicon from domain and convert to PNG",
   "version": "0.0.1",
   "author": {
     "name": "Gilles Wittenberg",
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/gilleswittenberg/NodeJS_Favicon2PNG"
+    "url": "git://github.com/gilleswittenberg/Node-js_favicon2PNG"
   },
   "main": "index",
   "engines": {
