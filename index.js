@@ -39,7 +39,11 @@ var showDefault = function showDefault (callback) {
 };
 
 var readFile = function readFile (domainString, callback) {
-  var filename = __dirname + '/' + cachedDir + '/' + domainString + '.png';
+  var filename;
+  if (!domainString) {
+    return showDefault(callback);
+  }
+  filename = __dirname + '/' + cachedDir + '/' + domainString + '.png';
   fs.exists(filename, function (exists) {
     if (!exists) {
       favicon('http://' + domainString, function (err, faviconUrl) {

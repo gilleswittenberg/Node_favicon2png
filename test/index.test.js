@@ -4,9 +4,9 @@ var favicon2Image;
 
 // start with a clean module
 beforeEach(function () {
-  delete require.cache[require.resolve(__dirname + '/../')]
+  delete require.cache[require.resolve(__dirname + '/../')];
   favicon2Image = require(__dirname + '/../');
-})
+});
 
 describe("getSetting default cachedDir", function () {
   it("get cachedDir", function (done) {
@@ -27,6 +27,18 @@ describe("configure", function () {
     done();
   });
 });
+
+describe("empty string domain", function () {
+  it("return default PNG", function (done) {
+    favicon2Image.readFile('', function (err, img) {
+      fs.readFile(__dirname + '/../favicon.png', function (errExpected, imgExpected) {
+        img.should.eql(imgExpected);
+        done();
+      });
+    });
+  });
+});
+
 
 describe("invalid domain", function () {
   it("return default PNG", function (done) {
@@ -71,12 +83,14 @@ describe("show cached icon", function () {
   it("not return default PNG", function (done) {
     // check if cached file exists
     var path = __dirname + '/../cached_images/www.github.com.png';
-    fs.existsSync(path).should.be.true;
-    // check if cached file is returned
-    favicon2Image.readFile('www.github.com', function (err, img) {
-      fs.readFile(path, function (errExpected, imgExpected) {
-        img.should.eql(imgExpected);
-        done();
+    fs.exists(path, function (exists) {
+      exists.should.be.true;
+      // check if cached file is returned
+      favicon2Image.readFile('www.github.com', function (err, img) {
+        fs.readFile(path, function (errExpected, imgExpected) {
+          img.should.eql(imgExpected);
+          done();
+        });
       });
     });
   });
