@@ -1,7 +1,7 @@
 {
   "name": "favicon2png",
   "description": "Get favicon from domain and convert to PNG",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
     "name": "Gilles Wittenberg",
     "url": "http://www.gilleswittenberg.com"

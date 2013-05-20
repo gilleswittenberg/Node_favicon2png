@@ -51,28 +51,34 @@ var readFile = function readFile (domainString, callback) {
         if (!faviconUrl) {
           return showDefault(callback);
         }
-        var tmpFilename = __dirname + '/tmp/' + domainString + path.extname(faviconUrl);
-        var download = wget.download(faviconUrl, tmpFilename);
-        // show default
-        download.on('error', function (err) {
-          showDefault(callback);
-        });
-        download.on('end', function () {
-          imagemagick.convert(
-            [tmpFilename, '-thumbnail', '16x16', '-flatten', filename],
-            function (err, stdout){
-              // remove tmp file
-              process.nextTick(function () {
-                fs.unlink(tmpFilename);
-              });
-              // show default
-              if (err) {
-                return showDefault(callback);
-              }
-              // show converted file
-              fs.readFile(filename, callback);
-            }
-          );
+        // create tmp dir if not exists
+        fs.mkdir(__dirname + '/tmp', function (err) {
+          var tmpFilename = __dirname + '/tmp/' + domainString + path.extname(faviconUrl);
+          var download = wget.download(faviconUrl, tmpFilename);
+          // show default
+          download.on('error', function (err) {
+            showDefault(callback);
+          });
+          download.on('end', function () {
+            // create cachedDir if not exists
+            fs.mkdir(__dirname + '/' + cachedDir, function (err) {
+              imagemagick.convert(
+                [tmpFilename, '-thumbnail', '16x16', '-flatten', filename],
+                function (err, stdout){
+                  // remove tmp file
+                  process.nextTick(function () {
+                    fs.unlink(tmpFilename);
+                  });
+                  // show default
+                  if (err) {
+                    return showDefault(callback);
+                  }
+                  // show converted file
+                  fs.readFile(filename, callback);
+                }
+              );
+            });
+          });
         });
       });
     } else {
