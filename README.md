@@ -3,7 +3,7 @@ Get favicon from domain. Convert to PNG.
 
 ## Usage
 ```js
-var favicon2PNG = require('favicon2PNG');
+var favicon2PNG = require('favicon2png');
 favicon2PNG.readFile('www.github.com', function (err, data) {  
     if (err) throw err;  
     // use data  
