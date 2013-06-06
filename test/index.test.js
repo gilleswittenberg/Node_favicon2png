@@ -15,7 +15,7 @@ describe("getSetting default cachedDir", function () {
     done();
   });
   it("get defaultPNG", function (done) {
-    favicon2Image.getSetting('defaultPNG').should.eql('favicon.png');
+    favicon2Image.getSetting('defaultPNG').should.eql(path.join(__dirname, '../favicon.png'));
     done();
   });
 });

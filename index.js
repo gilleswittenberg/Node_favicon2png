@@ -7,7 +7,7 @@ var imagemagick = require('imagemagick');
 
 // settings
 var cachedDir = path.join(__dirname, 'cached_images');
-var defaultPNG = 'favicon.png';
+var defaultPNG = path.join(__dirname, 'favicon.png');
 
 // read setting
 function getSetting (setting) {
@@ -35,7 +35,7 @@ function configure (config) {
 }
 
 var showDefault = function showDefault (callback) {
-  fs.readFile(__dirname + '/' + defaultPNG, callback);
+  fs.readFile(defaultPNG, callback);
 };
 
 var readFile = function readFile (domainString, callback) {
