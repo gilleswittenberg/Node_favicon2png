@@ -1,3 +1,4 @@
 /node_modules
 /cached_images
-/tmp
+/tmp/*
+!/tmp/empty
