@@ -1,5 +1,6 @@
-var should  = require('should');
-var fs  = require('fs');
+var should = require('should');
+var fs = require('fs');
+var path = require('path');
 var favicon2Image;
 
 // start with a clean module
@@ -10,7 +11,7 @@ beforeEach(function () {
 
 describe("getSetting default cachedDir", function () {
   it("get cachedDir", function (done) {
-    favicon2Image.getSetting('cachedDir').should.eql('cached_images');
+    favicon2Image.getSetting('cachedDir').should.eql(path.join(__dirname, '../cached_images'));
     done();
   });
   it("get defaultPNG", function (done) {

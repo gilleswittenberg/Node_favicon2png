@@ -6,7 +6,7 @@ var wget = require('wget');
 var imagemagick = require('imagemagick');
 
 // settings
-var cachedDir = 'cached_images';
+var cachedDir = path.join(__dirname, 'cached_images');
 var defaultPNG = 'favicon.png';
 
 // read setting
@@ -43,7 +43,7 @@ var readFile = function readFile (domainString, callback) {
   if (!domainString) {
     return showDefault(callback);
   }
-  filename = __dirname + '/' + cachedDir + '/' + domainString + '.png';
+  filename = cachedDir + '/' + domainString + '.png';
   fs.exists(filename, function (exists) {
     if (!exists) {
       favicon('http://' + domainString, function (err, faviconUrl) {
